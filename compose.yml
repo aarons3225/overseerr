@@ -1,0 +1,19 @@
+services:
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=America/Phoenix
+      - PORT=5055 #optional
+    ports:
+      - 5055:5055
+    volumes:
+      - ./:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+    networks:
+      - utilities
+networks: 
+  utilities:
+    external: true
